@@ -2,18 +2,18 @@
     QuantumReach TPS & MPS Edition
 ]]
 
--- Services
+
 local UIS = game:GetService("UserInputService")
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local Workspace = game:GetService("Workspace")
 local StarterGui = game:GetService("StarterGui")
 
--- Player
+
 local player = Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 
--- Configurações
+
 local config = {
     reach = 10,
     transparency = 0.7,
@@ -21,7 +21,7 @@ local config = {
     showVisual = true
 }
 
--- Cache
+
 local balls = {}
 local reachCircle = nil
 local gui = nil
@@ -30,13 +30,13 @@ local connections = {}
 local isEnabled = true
 local isGUIVisible = true
 
--- Tipos de bolas procuradas (SÓ TPS E MPS)
+-- tcs e saml sow viaja n
 local ballTypes = {
     "TPS",
-    "MPS"
+    "SAML"
 }
 
--- Notificações
+
 local function notify(title, message)
     StarterGui:SetCore("SendNotification", {
         Title = title,
@@ -46,7 +46,7 @@ local function notify(title, message)
     })
 end
 
--- Atualizar TPS e MPS
+
 local function refreshBalls(force)
     if not force and os.time() - lastRefresh < 2 then
         return
@@ -57,16 +57,16 @@ local function refreshBalls(force)
     
     for _, obj in pairs(Workspace:GetDescendants()) do
         local name = obj.Name
-        if (name == "TPS" or name == "MPS") and obj:IsA("BasePart") then
+        if (name == "TPS" or name == "SAML") and obj:IsA("BasePart") then
             table.insert(balls, obj)
         end
     end
     
-    -- Debug info
+    
     print("[Quantum] TPS encontrados: " .. #balls)
 end
 
--- Criar círculo verde
+
 local function createReachCircle()
     if reachCircle then
         reachCircle:Destroy()
@@ -78,13 +78,13 @@ local function createReachCircle()
     reachCircle.Size = Vector3.new(config.reach * 2, config.reach * 2, config.reach * 2)
     reachCircle.Transparency = config.transparency
     reachCircle.Color = Color3.fromRGB(0, 255, 0) -- VERDE
-    reachCircle.Material = Enum.Material.Neon
+    reachCircle.Material = Enum.Material.ForceField
     reachCircle.Anchored = true
     reachCircle.CanCollide = false
     reachCircle.CastShadow = false
     reachCircle.Parent = Workspace
     
-    -- Seguir jogador
+    
     local followConn = RunService.RenderStepped:Connect(function()
         if not config.showVisual or not isEnabled then
             reachCircle.Transparency = 1
@@ -100,7 +100,7 @@ local function createReachCircle()
     table.insert(connections, followConn)
 end
 
--- Coletar TPS e MPS
+-- Coletar TPS e SAML
 local function collectBalls()
     if not character or not isEnabled then return end
     
@@ -306,21 +306,21 @@ local function initialize()
         end
     end)
     
-    notify("QuantumReach", "TPS & MPS ativos!", 2)
+    notify("QuantumReach", "cabelo é chicleteira? pl0shzucr", 2)
 end
 
--- Quando personagem spawnar
+
 player.CharacterAdded:Connect(function(char)
     character = char
     task.wait(1)
     initialize()
 end)
 
--- Iniciar
+
 if player.Character then
     task.spawn(initialize)
 end
 
 print("=====================")
-print("QuantumReach TPS & MPS")
+print("QuantumReach TPS & SAML made by cab")
 print("=====================")
