@@ -1,1 +1,94 @@
+-- Invisibilidade by cab
 
+local Players = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+local TweenService = game:GetService("TweenService")
+
+local player = Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+
+
+local function createGUI()
+	local screenGui = Instance.new("ScreenGui")
+	screenGui.Name = "InvisibilityGUI"
+	screenGui.Parent = player:WaitForChild("PlayerGui")
+	
+	local button = Instance.new("TextButton")
+	button.Size = UDim2.new(0, 200, 0, 50)
+	button.Position = UDim2.new(0.5, -100, 0.9, -25)
+	button.BackgroundColor3 = Color3.fromRGB(30, 136, 229)
+	button.TextColor3 = Color3.white
+	button.Text = "Fucking ShutUp"
+	button.Font = Enum.Font.GothamBold
+	button.TextSize = 18
+	button.Parent = screenGui
+	
+	return button
+end
+
+
+local isInvisible = false
+
+
+local function toggleVisibility()
+	isInvisible = not isInvisible
+	
+	
+	for _, part in pairs(character:GetChildren()) do
+		if part:IsA("BasePart") then
+			
+			local tweenInfo = TweenInfo.new(0.3, Enum.EasingStyle.Quad)
+			local tween = TweenService:Create(part, tweenInfo, {
+				Transparency = isInvisible and 1 or 0
+			})
+			tween:Play()
+		end
+		
+		
+		if part:IsA("Accessory") then
+			local handle = part:FindFirstChild("Handle")
+			if handle then
+				local tweenInfo = TweenInfo.new(0.3, Enum.EasingStyle.Quad)
+				local tween = TweenService:Create(handle, tweenInfo, {
+					Transparency = isInvisible and 1 or 0
+				})
+				tween:Play()
+			end
+		end
+		
+		
+		if part:IsA("Clothing") or part:IsA("ShirtGraphic") then
+			
+			
+		end
+	end
+end
+
+
+local button = createGUI()
+
+
+button.MouseButton1Click:Connect(function()
+	toggleVisibility()
+	
+	
+	if isInvisible then
+		button.Text = "Visivel"
+		button.BackgroundColor3 = Color3.fromRGB(229, 30, 99)
+	else
+		button.Text = "Invisível"
+		button.BackgroundColor3 = Color3.fromRGB(30, 136, 229)
+	end
+end)
+
+
+player.CharacterAdded:Connect(function(newChar)
+	character = newChar
+	
+	wait(1)
+	
+	
+	if isInvisible then
+		toggleVisibility()
+	end
+end)
