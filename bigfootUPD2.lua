@@ -57,7 +57,7 @@ local function refreshBalls(force)
     
     for _, obj in pairs(Workspace:GetDescendants()) do
         local name = obj.Name
-        if (name == "TPS" or name == "SAML") and obj:IsA("BasePart") then
+        if (name == "TPS" or name == "CBM") and obj:IsA("BasePart") then
             table.insert(balls, obj)
         end
     end
