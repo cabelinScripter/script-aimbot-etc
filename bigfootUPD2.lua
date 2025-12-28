@@ -16,7 +16,7 @@ local character = player.Character or player.CharacterAdded:Wait()
 
 local config = {
     reach = 10,
-    transparency = 1,
+    transparency = 0.7,
     autoCollect = true,
     showVisual = true
 }
