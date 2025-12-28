@@ -33,7 +33,7 @@ local isGUIVisible = true
 -- tcs e saml sow viaja n
 local ballTypes = {
     "TPS",
-    "SAML",
+    "Ball",
 }
 
 
