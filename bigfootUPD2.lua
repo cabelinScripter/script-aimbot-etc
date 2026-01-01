@@ -33,7 +33,7 @@ local isGUIVisible = true
 -- tcs e saml sow viaja n
 local ballTypes = {
     "TPS",
-    "Ball",
+    "Ball2",
 }
 
 
@@ -57,7 +57,7 @@ local function refreshBalls(force)
     
     for _, obj in pairs(Workspace:GetDescendants()) do
         local name = obj.Name
-        if (name == "TPS" or name == "Ball") and obj:IsA("BasePart") then
+        if (name == "TPS" or name == "Ball2") and obj:IsA("BasePart") then
             table.insert(balls, obj)
         end
     end
